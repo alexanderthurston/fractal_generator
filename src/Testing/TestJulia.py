@@ -1,5 +1,5 @@
 import unittest
-from julia_fractal import getColorFromGradient, grad, WHITE, f, getFractalConfigurationDataFromFractalRepositoryDictionary 
+from julia_fractal import getColorFromGradient, grad, WHITE, juliaConfigDict, getFractalConfigurationDataFromFractalRepositoryDictionary
 
 
 # autocmd BufWritePost <buffer> !python3 runTests.py
@@ -20,12 +20,12 @@ class TestJulia(unittest.TestCase):
 
 
     def test_dictionaryGetter(self):
-        self.assertIsNone(getFractalConfigurationDataFromFractalRepositoryDictionary(f, 'absent'))
-        self.assertIsNotNone(getFractalConfigurationDataFromFractalRepositoryDictionary(f, 'fulljulia'))
-        self.assertIsNone(getFractalConfigurationDataFromFractalRepositoryDictionary(f, ''))
-        self.assertIsNotNone(getFractalConfigurationDataFromFractalRepositoryDictionary(f, 'lakes'))
-        self.assertIsNone(getFractalConfigurationDataFromFractalRepositoryDictionary(f, 'Still Not In Here'))
-        self.assertIsNotNone(getFractalConfigurationDataFromFractalRepositoryDictionary(f, 'hourglass'))
+        self.assertIsNone(getFractalConfigurationDataFromFractalRepositoryDictionary(juliaConfigDict, 'absent'))
+        self.assertIsNotNone(getFractalConfigurationDataFromFractalRepositoryDictionary(juliaConfigDict, 'fulljulia'))
+        self.assertIsNone(getFractalConfigurationDataFromFractalRepositoryDictionary(juliaConfigDict, ''))
+        self.assertIsNotNone(getFractalConfigurationDataFromFractalRepositoryDictionary(juliaConfigDict, 'lakes'))
+        self.assertIsNone(getFractalConfigurationDataFromFractalRepositoryDictionary(juliaConfigDict, 'Still Not In Here'))
+        self.assertIsNotNone(getFractalConfigurationDataFromFractalRepositoryDictionary(juliaConfigDict, 'hourglass'))
 
 
 

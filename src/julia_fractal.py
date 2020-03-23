@@ -23,10 +23,10 @@ def getColorFromGradient(z):
         z = z * z + c  # Iteratively compute z1, z2, z3 ...
         if abs(z) > 2:
             return grad[i]  # The sequence is unbounded
-            z += z + c
+            # z += z + c
     # TODO: One of these return statements makes the program crash sometimes
     return grad[77]         # Else this is a bounded sequence
-    return grad[78]
+    #return grad[78]
 
 
 def getFractalConfigurationDataFromFractalRepositoryDictionary(dictionary, name):
@@ -38,14 +38,18 @@ def getFractalConfigurationDataFromFractalRepositoryDictionary(dictionary, name)
 
     Return False otherwise
     """
-    for key in dictionary:
-        if key in dictionary:
-            if key == name:
-                value = dictionary[key]
-                return key
+
+    if name in dictionary:
+        return name
+
+    # for key in dictionary:
+    #     if key in dictionary:
+    #         if key == name:
+    #             value = dictionary[key]
+    #             return key
 
 
-def makePicture(f, i, e):
+def makePicture(f):
     """Paint a Fractal image into the TKinter PhotoImage canvas.
     Assumes the image is 512x512 pixels."""
 
@@ -69,25 +73,25 @@ def makePicture(f, i, e):
     #       too many different things... this is the correct part of the
     #       program to create a GUI window, right?
     canvas.create_image((256, 256), image=photo, state="normal")
-    canvas.pack()  # This seems repetitive
-    canvas.pack()  # But it is how Larry wrote it
-    canvas.pack()  # Larry's a smart guy.  I'm sure he has his reasons.
-
-    area_in_pixels = 512 * 512
-
-    canvas.pack()  # Does this even matter?
-    # At this scale, how much length and height of the
-    # imaginary plane does one pixel cover?
+    # canvas.pack()  # This seems repetitive
+    # canvas.pack()  # But it is how Larry wrote it
+    # canvas.pack()  # Larry's a smart guy.  I'm sure he has his reasons.
+    #
+    # area_in_pixels = 512 * 512
+    #
+    # canvas.pack()  # Does this even matter?
+    # # At this scale, how much length and height of the
+    # # imaginary plane does one pixel cover?
     size = abs(max[0] - min[0]) / 512.0
 
-    canvas.pack()
-    fraction = int(512 / 64)
+    # canvas.pack()
+    # fraction = int(512 / 64)
     for r in range(512, 0, -1):
         for c in range(512):
             x = min[0] + c * size
             y = min[1] + r * size
-            c2 = getColorFromGradient(complex(x, y))
-            photo.put(c2, (c, 512 - r))
+            color = getColorFromGradient(complex(x, y))
+            photo.put(color, (c, 512 - r))
         win.update()  # display a row of pixels
 
 
@@ -125,20 +129,26 @@ grad = [
 #
 # TODO: Maybe it would be a good idea to incorporate the complex value `c` into
 # this configuration dictionary instead of hardcoding it into this program?
-f = {
+juliaConfigDict = {
         'fulljulia': {
+            'type': 'julia',
+            'c': complex(-1.0, 0.0),
             'centerX':     0.0,
             'centerY':     0.0,
             'axisLength':  4.0,
             },
 
         'hourglass': {
+            'type': 'julia',
+            'c': complex(-1.0, 0.0),
             'centerX':     0.618,
             'centerY':     0.00,
             'axisLength':  0.017148277367054,
         },
 
         'lakes': {
+            'type': 'julia',
+            'c': complex(-1.0, 0.0),
             'centerX': -0.339230468501458,
             'centerY': 0.417970758224314,
             'axisLength': 0.164938488846612,
@@ -154,26 +164,26 @@ if __name__ == '__main__':
     # Process command-line arguments, allowing the user to select their fractal
     if len(sys.argv) < 2:
         print("Please provide the name of a fractal as an argument")
-        for i in f:
+        for i in juliaConfigDict:
             print(f"\t{i}")
         sys.exit(1)
 
-    elif sys.argv[1] not in f:
+    elif sys.argv[1] not in juliaConfigDict:
         print(f"ERROR: {sys.argv[1]} is not a valid fractal")
         print("Please choose one of the following:")
-        for i in f:
+        for i in juliaConfigDict:
             print(f"\t{i}")
         sys.exit(1)
 
     else:
-        i = getFractalConfigurationDataFromFractalRepositoryDictionary(f, sys.argv[1])
+        i = getFractalConfigurationDataFromFractalRepositoryDictionary(juliaConfigDict, sys.argv[1])
         
 
     # Set up the GUI so that we can display the fractal image on the screen
     win = Tk()
 
     photo = PhotoImage(width=512, height=512)
-    makePicture(f[i], i, ".png")
+    makePicture(juliaConfigDict[i])
 
     # Output the Fractal into a .png image
     photo.write(i + ".png")

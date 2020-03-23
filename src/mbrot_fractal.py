@@ -26,26 +26,26 @@ gradient = [
         '#003d88', '#003784', '#003181', '#002c7e', '#00277a', '#002277',
         ]
 
-MAX_ITERATIONS = len(gradient)
-z = 0
+# MAX_ITERATIONS = len(gradient)
+# z = 0
 
 
 def colorOfThePixel(c, gradient):
     """Return the color of the current pixel within the Mandelbrot set"""
-    global z
-    z = complex(0, 0)  # z0
+    MAX_ITERATIONS = len(gradient)
+    z = complex(0, 0) #z0
 
-    global MAX_ITERATIONS
-    global i
+    # global MAX_ITERATIONS
+    # global i
 
     for i in range(MAX_ITERATIONS):
         z = z * z + c  # Get z1, z2, ...
         if abs(z) > 2:
-            z = 2.0
+            # z = 2.0
             return gradient[i]  # The sequence is unbounded
     # XXX: one of these return statements made the program crash...
     return gradient[MAX_ITERATIONS - 1]   # Indicate a bounded sequence
-    return gradient[MAX_ITERATIONS]
+    # return gradient[MAX_ITERATIONS]
 
 
 def paint(fractals, imagename):
@@ -62,7 +62,7 @@ def paint(fractals, imagename):
     minx = fractal['centerX'] - (fractal['axisLen'] / 2.0)
     maxx = fractal['centerX'] + (fractal['axisLen'] / 2.0)
     miny = fractal['centerY'] - (fractal['axisLen'] / 2.0)
-    maxy = fractal['centerY'] + (fractal['axisLen'] / 2.0)
+    # maxy = fractal['centerY'] + (fractal['axisLen'] / 2.0)
 
     # Display the image on the screen
     canvas = Canvas(window, width=512, height=512, bg='#ffffff')
