@@ -4,6 +4,7 @@ on-screen and write a PNG image.  This file is the main entry point of the
 program."""
 import sys
 from Config import Config
+from ImagePainter import ImagePainter
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -11,11 +12,11 @@ if __name__ == '__main__':
         Config().printAll()
         sys.exit(1)
 
-    elif not Config().containsImage():
+    elif not Config().containsImage(sys.argv[1]):
         print(f"ERROR: {sys.argv[1]} is not a valid fractal")
         print("Please choose one of the following:")
         Config().printAll()
         sys.exit(1)
 
     else:
-        image = sys.argv[1]
+        ImagePainter(sys.argv[1])

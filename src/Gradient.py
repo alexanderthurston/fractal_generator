@@ -22,5 +22,8 @@ class Gradient:
         '#00649c', '#005d98', '#005695', '#004f92', '#00498e', '#00438b',
         '#003d88', '#003784', '#003181', '#002c7e', '#00277a', '#002277',
         ]
+
     def getColor(self, index):
         return self.gradient[index]
+    def getLength(self):
+        return len(self.gradient)

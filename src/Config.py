@@ -64,7 +64,7 @@ class Config:
                 'c': complex(-1.0, 0.0),
                 'centerX': 0.0,
                 'centerY': 0.0,
-                'axisLength': 4.0,
+                'axisLen': 4.0,
             },
 
             'hourglass': {
@@ -72,7 +72,7 @@ class Config:
                 'c': complex(-1.0, 0.0),
                 'centerX': 0.618,
                 'centerY': 0.00,
-                'axisLength': 0.017148277367054,
+                'axisLen': 0.017148277367054,
             },
 
             'lakes': {
@@ -80,7 +80,7 @@ class Config:
                 'c': complex(-1.0, 0.0),
                 'centerX': -0.339230468501458,
                 'centerY': 0.417970758224314,
-                'axisLength': 0.164938488846612,
+                'axisLen': 0.164938488846612,
             },
 
         }
@@ -96,9 +96,9 @@ class Config:
             return self.juliaConfigDict[key]
 
     def printAll(self):
-        print("Mandelbrot Fractals")
+        print("\nMandelbrot Fractals")
         for i in self.mandelbrotConfigDict:
             print(f"\t{i}")
-        print("Julia Fractals")
+        print("\nJulia Fractals")
         for i in self.juliaConfigDict:
             print(f"\t{i}")

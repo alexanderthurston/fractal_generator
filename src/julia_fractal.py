@@ -86,12 +86,12 @@ def makePicture(f):
 
     # canvas.pack()
     # fraction = int(512 / 64)
-    for r in range(512, 0, -1):
-        for c in range(512):
-            x = min[0] + c * size
-            y = min[1] + r * size
+    for row in range(512, 0, -1):
+        for col in range(512):
+            x = min[0] + col * size
+            y = min[1] + row * size
             color = getColorFromGradient(complex(x, y))
-            photo.put(color, (c, 512 - r))
+            photo.put(color, (col, 512 - row))
         win.update()  # display a row of pixels
 
 
