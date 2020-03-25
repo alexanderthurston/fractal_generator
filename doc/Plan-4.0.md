@@ -13,7 +13,8 @@
             images(mbrot_fractal lines 99-135)/f(julia_fractal lines 128-147):
 
             Simplified by:
-            Reorganizing modules and storing shared grad/gradient array in Gradient class.
+            Reorganizing modules and storing grad/gradient array in Gradient class. Manipulated juliaGradient to match
+                original capabilities of program.
             Reorganizing modules and storing shared dictionary images/f in Config class.
 
     Julia Code Smells:
@@ -239,8 +240,34 @@
             Simplified by:
             Deletion of above code as it is not used anywhere else in the program.
 
+2. System Analysis - NA
 
+3. System Design -
+    Let User Input:
+        Fractal selection
+    System will:
+        Verify selection
+        If valid:
+            Generate ImagePainter object
+            Call on Config class to retrieve fractal data pertinent to fractal drawing.
+            Call on Mandelbrot or Julia classes depending on type of fractal selection and retrieve color of current pixel.
+                Mandelbrot and Julia classes will call upon gradient class to retrieve color code info.
+            Display and update Tkinter window pixel by pixel until completion of drawing.
+            Exit when window is closed by user.
+        If invalid:
+            Print error message
+            Print menu selection
+            Exit
+    Display:
+        Pixel by pixel generation of selected fractal.
+        Display fractal until user closes window.
 
+4. Implementation - src folder
+5. Testing
+    Unit Tests-
+        All passed.
+
+    All fractal selections result in identical match in output to original code.
 
 
 
