@@ -5,18 +5,17 @@ class Julia:
 
     def __init__(self):
         self.complexNum = complex(-1.0,0.0)
+        self.gradient = Gradient()
 
     def pixelColor(self, z):
         """Return the index of the color of the current pixel within the Julia set
         in the gradient array"""
 
+        MAX_ITERATIONS = self.gradient.getLength()
 
-
-        MAX_ITERATIONS = Gradient().getLength()
-
-        for i in range(MAX_ITERATIONS):
-            z = z * z + self.complexNum  # Iteratively compute z1, z2, z3 ...
+        for i in range(MAX_ITERATIONS): #Customer was not using full gradient of colors in earlier model. Decided to use full gradient instead.
+            z = z * z + self.complexNum #If customer is not satisfied I can easily fix the coloration by reverting to the original code or manipulating gradient array.
             if abs(z) > 2:
-                return Gradient().getColor(i)
-        return Gradient().getColor(MAX_ITERATIONS - 1)
+                return self.gradient.getColor(i)
+        return self.gradient.getColor(MAX_ITERATIONS - 1)
 

@@ -41,18 +41,15 @@ class ImagePainter:
         canvas.pack()
         canvas.create_image((256, 256), image=self.photoImage, state="normal")
 
-        # At this scale, how much length and height on the imaginary plane does one
-        # pixel take?
-
-        for row in range(512, 0, -1):
-            for col in range(512):
+        for row in range(self.height, 0, -1):
+            for col in range(self.width):
                 x = minx + col * pixelsize
                 y = miny + row * pixelsize
                 if fractal['type'] == 'mandelbrot':
                     color = Mandelbrot().pixelColor(complex(x, y))
                 if fractal['type'] == 'julia':
                     color = Julia().pixelColor(complex(x, y))
-                self.photoImage.put(color, (col, 512 - row))
+                self.photoImage.put(color, (col, self.height - row))
             self.window.update()  # display a row of pixels
 
 
