@@ -8,24 +8,24 @@ from Julia import Julia
 
 class ImagePainter:
     def __init__(self, image):
-        self.image = image
-        self.window = Tk()
-        self.width = 512
-        self.height = 512
-        self.color = '#ffffff'
-        self.photoImage = PhotoImage(width=self.width, height=self.height)
-        self.paint(Config().getImage(self.image))
+        self.__image = image
+        self.__window = Tk()
+        self.__width = 512
+        self.__height = 512
+        self.__color = '#ffffff'
+        self.__photoImage = PhotoImage(width=self.__width, height=self.__height)
+        self.__paint(Config().getImage(self.__image))
 
         # Save the image as a PNG
-        self.photoImage.write(f"{self.image}.png")
-        print(f"Wrote image {self.image}.png")
+        self.__photoImage.write(f"{self.__image}.png")
+        print(f"Wrote image {self.__image}.png")
 
         # Call tkinter.mainloop so the GUI remains open
         mainloop()
 
 
 
-    def paint(self, fractal):
+    def __paint(self, fractal):
         """Paint a Fractal image into the TKinter PhotoImage canvas.
         This code creates an image which is 640x640 pixels in size."""
 
@@ -33,23 +33,23 @@ class ImagePainter:
         minx = fractal['centerX'] - (fractal['axisLen'] / 2.0)
         maxx = fractal['centerX'] + (fractal['axisLen'] / 2.0)
         miny = fractal['centerY'] - (fractal['axisLen'] / 2.0)
-        pixelsize = abs(maxx - minx) / 512
+        pixelsize = abs(maxx - minx) / self.__width
 
 
         # Display the image on the screen
-        canvas = Canvas(self.window, width=self.width, height=self.height, bg=self.color)
+        canvas = Canvas(self.__window, width=self.__width, height=self.__height, bg=self.__color)
         canvas.pack()
-        canvas.create_image((256, 256), image=self.photoImage, state="normal")
+        canvas.create_image((self.__width / 2, self.__height / 2), image=self.__photoImage, state="normal")
 
-        for row in range(self.height, 0, -1):
-            for col in range(self.width):
+        for row in range(self.__height, 0, -1):
+            for col in range(self.__width):
                 x = minx + col * pixelsize
                 y = miny + row * pixelsize
                 if fractal['type'] == 'mandelbrot':
                     color = Mandelbrot().pixelColor(complex(x, y))
                 if fractal['type'] == 'julia':
                     color = Julia().pixelColor(complex(x, y))
-                self.photoImage.put(color, (col, self.height - row))
-            self.window.update()  # display a row of pixels
+                self.__photoImage.put(color, (col, self.__height - row))
+            self.__window.update()  # display a row of pixels
 
 

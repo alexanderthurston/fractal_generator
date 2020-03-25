@@ -8,7 +8,7 @@ fractals from Mandelbrot fractals add a new key/value pair to each dictionary:""
 class Config:
     def __init__(self):
 
-        self.mandelbrotConfigDict = {
+        self.__mandelbrotConfigDict = {
                 'fullmandelbrot': {
                     'type': 'mandelbrot',
                     'c': complex(0.0, 0.0),
@@ -58,7 +58,7 @@ class Config:
                     },
                 }
 
-        self.juliaConfigDict = {
+        self.__juliaConfigDict = {
             'fulljulia': {
                 'type': 'julia',
                 'c': complex(-1.0, 0.0),
@@ -86,19 +86,19 @@ class Config:
         }
 
     def containsImage(self, key):
-        if key in self.mandelbrotConfigDict or key in self.juliaConfigDict:
+        if key in self.__mandelbrotConfigDict or key in self.__juliaConfigDict:
             return True
 
     def getImage(self, key):
-        if key in self.mandelbrotConfigDict:
-            return self.mandelbrotConfigDict[key]
-        if key in self.juliaConfigDict:
-            return self.juliaConfigDict[key]
+        if key in self.__mandelbrotConfigDict:
+            return self.__mandelbrotConfigDict[key]
+        if key in self.__juliaConfigDict:
+            return self.__juliaConfigDict[key]
 
     def printAll(self):
         print("\nMandelbrot Fractals")
-        for i in self.mandelbrotConfigDict:
+        for i in self.__mandelbrotConfigDict:
             print(f"\t{i}")
         print("\nJulia Fractals")
-        for i in self.juliaConfigDict:
+        for i in self.__juliaConfigDict:
             print(f"\t{i}")

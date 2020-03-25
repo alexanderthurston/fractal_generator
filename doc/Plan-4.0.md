@@ -13,8 +13,8 @@
             images(mbrot_fractal lines 99-135)/f(julia_fractal lines 128-147):
 
             Simplified by:
-            Reorganizing modules and storing shared grad/gradient array into Gradient class.
-            Reorganizing modules and storing shared dictionary images/f into Config class.
+            Reorganizing modules and storing shared grad/gradient array in Gradient class.
+            Reorganizing modules and storing shared dictionary images/f in Config class.
 
     Julia Code Smells:
 

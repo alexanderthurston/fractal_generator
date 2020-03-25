@@ -4,7 +4,8 @@ from Gradient import Gradient
 class Mandelbrot:
 
     def __init__(self):
-        self.complexNum = complex(0.0,0.0)
+        self.__complexNum = complex(0.0, 0.0)
+        self.__gradient = Gradient()
 
     def pixelColor(self, c):
         """Return the color of the current pixel within the Mandelbrot set"""
@@ -12,7 +13,7 @@ class Mandelbrot:
         MAX_ITERATIONS = Gradient().getLength()
 
         for i in range(MAX_ITERATIONS):
-            self.complexNum = self.complexNum * self.complexNum + c
-            if abs(self.complexNum) > 2:
-                return Gradient().getColor(i)
-        return Gradient().getColor(MAX_ITERATIONS - 1)
+            self.__complexNum = self.__complexNum * self.__complexNum + c
+            if abs(self.__complexNum) > 2:
+                return self.__gradient.getColor(i)
+        return self.__gradient.getColor(MAX_ITERATIONS - 1)

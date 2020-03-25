@@ -4,7 +4,7 @@ in the complex plane, the corresponding pixel is painted G[count]"""
 
 class Gradient:
     def __init__(self):
-        self.gradient = [
+        self.__gradient = [
         '#ffe4b5', '#ffe5b2', '#ffe7ae', '#ffe9ab', '#ffeaa8', '#ffeda4',
         '#ffefa1', '#fff29e', '#fff49a', '#fff797', '#fffb94', '#fffe90',
         '#fcff8d', '#f8ff8a', '#f4ff86', '#f0ff83', '#ebff80', '#e7ff7c',
@@ -24,6 +24,6 @@ class Gradient:
         ]
 
     def getColor(self, index):
-        return self.gradient[index]
+        return self.__gradient[index]
     def getLength(self):
-        return len(self.gradient)
+        return len(self.__gradient)

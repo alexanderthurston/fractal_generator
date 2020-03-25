@@ -6,6 +6,7 @@ import sys
 from Config import Config
 from ImagePainter import ImagePainter
 
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print("Please provide the name of a fractal as an argument")
