@@ -36,24 +36,21 @@
 
             Simplified to:
             Reorganizing grad variable into Gradient class and deletion of win as it is not used in the function.
+            Instead of returning color code in function, return iteration count.
             '''
             class Julia:
 
-                def __init__(self):
-                    self.complexNum = complex(-1.0,0.0)
-                    self.gradient = Gradient()
+                def __init__(self, max_iterations):
+                    self.__complexNum = complex(-1.0, 0.0)
+                    self.__max_iterations = max_iterations
 
-                def pixelColor(self, z):
-                    """Return the index of the color of the current pixel within the Julia set
-                    in the gradient array"""
+                def iterationCount(self, z):
 
-                    MAX_ITERATIONS = self.gradient.getLength()
-
-                    for i in range(MAX_ITERATIONS):
-                        z = z * z + self.complexNum
+                    for i in range(self.__max_iterations):
+                        z = z * z + self.__complexNum
                         if abs(z) > 2:
-                            return self.gradient.getColor(i)
-                    return self.gradient.getColor(MAX_ITERATIONS - 1)
+                            return i
+                    return self.__max_iterations - 1
             '''
 
         2. Unnecessary looping and overuse of conditionals in lines 41-45 of src/julia_fractal.py:
@@ -66,7 +63,8 @@
             '''
 
             Simplified by:
-            Reorganization of check into Config class method containsImage(). Main will check if image is defined by using this method.
+            Reorganization of check into Config class method containsImage(). Main will check if image is defined by using method below.
+
             '''
             def containsImage(self, key):
                 if key in self.mandelbrotConfigDict or key in self.juliaConfigDict:
@@ -114,28 +112,29 @@
             Reorganization of drawing method from julia_fractal and mbrot_fractal into one cohesive drawing method in ImagePainter class.
 
             '''
-            def paint(self, fractal):
+                def __paint(self, fractal):
 
-                minx = fractal['centerX'] - (fractal['axisLen'] / 2.0)
-                maxx = fractal['centerX'] + (fractal['axisLen'] / 2.0)
-                miny = fractal['centerY'] - (fractal['axisLen'] / 2.0)
-                pixelsize = abs(maxx - minx) / 512
+                    minx = fractal['centerX'] - (fractal['axisLen'] / 2.0)
+                    maxx = fractal['centerX'] + (fractal['axisLen'] / 2.0)
+                    miny = fractal['centerY'] - (fractal['axisLen'] / 2.0)
+                    pixelsize = abs(maxx - minx) / self.__width
 
 
-                canvas = Canvas(self.window, width=self.width, height=self.height, bg=self.color)
-                canvas.pack()
-                canvas.create_image((256, 256), image=self.photoImage, state="normal")
+                    # Display the image on the screen
+                    canvas = Canvas(self.__window, width=self.__width, height=self.__height, bg=self.__color)
+                    canvas.pack()
+                    canvas.create_image((self.__width / 2, self.__height / 2), image=self.__photoImage, state="normal")
 
-                for row in range(self.height, 0, -1):
-                    for col in range(self.width):
-                        x = minx + col * pixelsize
-                        y = miny + row * pixelsize
-                        if fractal['type'] == 'mandelbrot':
-                            color = Mandelbrot().pixelColor(complex(x, y))
-                        if fractal['type'] == 'julia':
-                            color = Julia().pixelColor(complex(x, y))
-                        self.photoImage.put(color, (col, self.height - row))
-                    self.window.update()
+                    for row in range(self.__height, 0, -1):
+                        for col in range(self.__width):
+                            x = minx + col * pixelsize
+                            y = miny + row * pixelsize
+                            if fractal['type'] == 'mandelbrot':
+                                color = Gradient('mandelbrot').getColor(Mandelbrot(Gradient('mandelbrot').getLength()).iterationCount(complex(x, y)))
+                            if fractal['type'] == 'julia':
+                                color = Gradient('julia').getColor(Julia(Gradient('julia').getLength()).iterationCount(complex(x, y)))
+                            self.__photoImage.put(color, (col, self.__height - row))
+                        self.__window.update()
 
             '''
 
@@ -183,13 +182,9 @@
            '''
            class Mandelbrot:
 
-                def __init__(self):
-                    self.complexNum = complex(0.0,0.0)
-
-                def pixelColor(self, c):
-                    """Return the color of the current pixel within the Mandelbrot set"""
-
-                    MAX_ITERATIONS = Gradient().getLength()
+               def __init__(self, max_iterations):
+                   self.__complexNum = complex(0.0, 0.0)
+                   self.__max_iterations = max_iterations
            '''
 
         2. Unnecessary variable assignment after usage on line 44 of src/mbrot_fractal.py:
