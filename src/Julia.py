@@ -1,21 +1,21 @@
 """Given a coordinate in the complex plane, return the iteration
 count of the Julia function for that point"""
-from Gradient import Gradient
+
 class Julia:
 
-    def __init__(self):
+    def __init__(self, max_iterations):
         self.__complexNum = complex(-1.0, 0.0)
-        self.__gradient = Gradient("julia")
+        self.__max_iterations = max_iterations
 
-    def pixelColor(self, z):
+    def iterationCount(self, z):
         """Return the index of the color of the current pixel within the Julia set
         in the gradient array"""
 
-        MAX_ITERATIONS = self.__gradient.getLength()
 
-        for i in range(MAX_ITERATIONS): #Customer was not using full gradient of colors in earlier model. Decided to manipulate gradient to keep original capability.
+
+        for i in range(self.__max_iterations): #Customer was not using full gradient of colors in earlier model. Decided to manipulate gradient to keep original capability.
             z = z * z + self.__complexNum
             if abs(z) > 2:
-                return self.__gradient.getColor(i)
-        return self.__gradient.getColor(MAX_ITERATIONS - 1)
+                return i
+        return self.__max_iterations - 1
 

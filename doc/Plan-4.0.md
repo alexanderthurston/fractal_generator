@@ -4,8 +4,8 @@
         Code will be split into modules:
             Main.py - Retrieves and verifies user input, then directs information to other modules in program.
             Config.py - Contains fractal configuration dictionaries for other modules to call upon.
-            Mandelbrot.py - Returns color code associated with the iteration count for certain point on complex plane for mandelbrot functions.
-            Julia.py - Returns color code associated with the iteration count for certain point on complex plane for Julia function.
+            Mandelbrot.py - Returns the iteration count for certain point on complex plane for mandelbrot functions.
+            Julia.py - Returns the iteration count for certain point on complex plane for Julia function.
             Gradient.py - Contains an array of different color codes corresponding to certain iteration counts.
             ImagePainter.py - Creates a Tk window and PhotoImage object capable of creating a PNG file.
 

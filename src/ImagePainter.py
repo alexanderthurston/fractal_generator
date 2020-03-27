@@ -5,6 +5,7 @@ from tkinter import Tk, Canvas, PhotoImage, mainloop
 from Config import Config
 from Mandelbrot import Mandelbrot
 from Julia import Julia
+from Gradient import Gradient
 
 class ImagePainter:
     def __init__(self, image):
@@ -46,9 +47,9 @@ class ImagePainter:
                 x = minx + col * pixelsize
                 y = miny + row * pixelsize
                 if fractal['type'] == 'mandelbrot':
-                    color = Mandelbrot().pixelColor(complex(x, y))
+                    color = Gradient('mandelbrot').getColor(Mandelbrot(Gradient('mandelbrot').getLength()).iterationCount(complex(x, y)))
                 if fractal['type'] == 'julia':
-                    color = Julia().pixelColor(complex(x, y))
+                    color = Gradient('julia').getColor(Julia(Gradient('julia').getLength()).iterationCount(complex(x, y)))
                 self.__photoImage.put(color, (col, self.__height - row))
             self.__window.update()  # display a row of pixels
 

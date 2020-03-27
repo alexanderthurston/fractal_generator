@@ -1,19 +1,18 @@
 """Given a coordinate in the complex plane, return the
 iteration count of the Mandelbrot function for that point"""
-from Gradient import Gradient
+
 class Mandelbrot:
 
-    def __init__(self):
+    def __init__(self, max_iterations):
         self.__complexNum = complex(0.0, 0.0)
-        self.__gradient = Gradient("mandelbrot")
+        self.__max_iterations = max_iterations
 
-    def pixelColor(self, c):
+
+    def iterationCount(self, c):
         """Return the color of the current pixel within the Mandelbrot set"""
 
-        MAX_ITERATIONS = self.__gradient.getLength()
-
-        for i in range(MAX_ITERATIONS):
+        for i in range(self.__max_iterations):
             self.__complexNum = self.__complexNum * self.__complexNum + c
             if abs(self.__complexNum) > 2:
-                return self.__gradient.getColor(i)
-        return self.__gradient.getColor(MAX_ITERATIONS - 1)
+                return i
+        return self.__max_iterations - 1
