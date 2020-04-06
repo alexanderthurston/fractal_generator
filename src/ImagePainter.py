@@ -2,23 +2,19 @@
 PhotoImage  stores the pixels and is capable of creating a PNG image file"""
 
 from tkinter import Tk, Canvas, PhotoImage, mainloop
-from Config import Config
-from Mandelbrot import Mandelbrot
-from Julia import Julia
-from Gradient import Gradient
 
 class ImagePainter:
-    def __init__(self, image):
-        self.__image = image
+    def __init__(self, fractal, gradient):
+        self.__fractal = fractal
         self.__window = Tk()
         self.__width = 512
         self.__height = 512
         self.__color = '#ffffff'
         self.__photoImage = PhotoImage(width=self.__width, height=self.__height)
-        self.__paint(Config().getImage(self.__image))
+        self.__paint(self.__fractal)
 
         # Save the image as a PNG
-        self.__photoImage.write(f"{self.__image}.png")
+        self.__photoImage.write(f"{self.__fractal}.png")
         print(f"Wrote image {self.__image}.png")
 
         # Call tkinter.mainloop so the GUI remains open
