@@ -1,11 +1,14 @@
-from Fractal import Fractal
+from Julia import Julia
+from Mandelbrot import Mandelbrot
+from Mandelbrot4 import Mandelbrot4
+
 
 class FractalFactory():
     def __init__(self):
         self.__configDict = {}
-        pass
 
     def makeFractal(self, fileName):
+
         if fileName == None:
             self.__configDict = {
                 'type': 'mandelbrot',
@@ -15,24 +18,41 @@ class FractalFactory():
                 'axislength': 4.0,
                 'iterations': 100
             }
+            return Mandelbrot(self.__configDict)
         else:
-            self.__readFile(fileName)
+            self.__configDict = self.__readFile(fileName)
+            if self.__configDict['type'] == 'mandelbrot':
+                return Mandelbrot(self.__configDict)
+            elif self.__configDict['type'] == 'julia':
+                return Julia(self.__configDict)
+            elif self.__configDict['type'] == 'mandelbrot4':
+                return Mandelbrot4(self.__configDict)
 
     def __readFile(self, fileName):
+        self.__configDict = {}
+        temp_dict = {}
+        checkList = ['type', 'pixels', 'centerx', 'centery', 'axislength', 'iterations']
 
         file = open(fileName)
         for line in file:
-            if "#" in line:
-                break
+            if "#" in line or line.endswith(":"):
+                continue
             fractalList = line.replace("\n", "").replace(" ", "").split(":")
 
-            if fractalList[0].lower() == "type":
-                if fractalList[1].lower() == 'mandelbrot' or fractalList[1].lower() == "julia" or fractalList[1].lower() == "mandelbrot4":
-                    self.__configDict[fractalList[0].lower()] = fractalList[1]
-            if fractalList[0].lower() == "pixels" and fractalList[1].isdigit():
-                self.__configDict[fractalList[0].lower()] = int(fractalList[1])
-            if fractalList[0].lower() == "centerx" or fractalList[0].lower() == "centery" or fractalList[0].lower() == "axislength":
-                self.__configDict[fractalList[0].lower()] = float(fractalList[1])
+            temp_dict[fractalList[0].lower()] = fractalList[1]
+
+        for i in checkList:
+            if i in temp_dict:
+                if i == "type":
+                    self.__configDict[i] = temp_dict[i]
+                elif i == "pixels" or i == "iterations" and temp_dict[i].isdigit():
+                    self.__configDict[i] = int(temp_dict[i])
+                elif i == "centerx" or i == "centery" or i == "axislength":
+                    self.__configDict[i] = float(temp_dict[i])
+                # else:
+                #     raise NotImplementedError("Incorrect format in fractal configuration file")
             else:
-                raise NotImplementedError("Incorrect format in fractal configuration file") #not gonna work but will do for now.
+                raise NotImplementedError("Incorrect format in fractal configuration file")
+
+        return self.__configDict
 
