@@ -35,11 +35,12 @@ class FractalFactory():
 
         file = open(fileName)
         for line in file:
-            if "#" in line or line.endswith(":"):
+            if line.startswith("#") or line.endswith(":"):
                 continue
-            fractalList = line.replace("\n", "").replace(" ", "").split(":")
+            else:
+                fractalList = line.replace("\n", "").replace(" ", "").split(":")
 
-            temp_dict[fractalList[0].lower()] = fractalList[1]
+                temp_dict[fractalList[0].lower()] = fractalList[1]
 
         for i in checkList:
             if i in temp_dict:
@@ -53,6 +54,6 @@ class FractalFactory():
                 #     raise NotImplementedError("Incorrect format in fractal configuration file")
             else:
                 raise NotImplementedError("Incorrect format in fractal configuration file")
-
+    
         return self.__configDict
 

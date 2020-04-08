@@ -7,7 +7,7 @@ class RedGradient(Gradient):
         self.__red = Color('red')
         self.__black = Color('black')
         self.__gradient = list(self.__red.range_to(self.__black, self.__iterations))
-        print(self.__gradient)
+
 
     def getColor(self, index):
         return str(self.__gradient[index].get_hex_l())

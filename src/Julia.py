@@ -7,7 +7,7 @@ class Julia(Fractal):
     def __init__(self, configDict):
         self.__configDict = configDict
         self.__complexNum = complex(-1.0, 0.0)
-        self.__max_iterations = self.__configDict['type']
+        self.__max_iterations = self.__configDict['iterations']
 
     def count(self, z):
         """Return the index of the color of the current pixel within the Julia set
