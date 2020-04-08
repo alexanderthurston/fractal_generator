@@ -8,6 +8,12 @@ class GradientFactory():
     def makeGradient(self, gradientName, iterations):
         if gradientName == None:
             return RedGradient(iterations)
+        if gradientName == 'red':
+            return RedGradient(iterations)
+        elif gradientName == 'blue':
+            return BlueGradient(iterations)
+        elif gradientName == "green":
+            return GreenGradient(iterations)
 
 
 

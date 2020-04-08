@@ -13,9 +13,10 @@ class ImagePainter:
         self.__window = Tk()
         self.__width = self.__fractal.getDictVal('pixels')
         self.__height = self.__fractal.getDictVal('pixels')
-        self.__color = '#ffffff'
+        self.__bgColor = '#ffffff'
+        print("Fractal: "+ str(self.__fractal) + ", Gradient:" + str(self.__gradient) + ", Iterations:" + str(self.__iterations))
         self.__photoImage = PhotoImage(width=self.__width, height=self.__height)
-        self.__paint(self.__fractal)
+        self.__paint()
 
         # Save the image as a PNG
         self.__photoImage.write(f"{self.__fractal.getDictVal('type')}.png")
@@ -26,19 +27,19 @@ class ImagePainter:
 
 
 
-    def __paint(self, fractal):
+    def __paint(self):
         """Paint a Fractal image into the TKinter PhotoImage canvas.
         This code creates an image which is 640x640 pixels in size."""
 
 
-        minx = fractal.getDictVal('centerx') - (fractal.getDictVal('axislength') / 2.0)
-        maxx = fractal.getDictVal('centerx') + (fractal.getDictVal('axislength') / 2.0)
-        miny = fractal.getDictVal('centery') - (fractal.getDictVal('axislength') / 2.0)
+        minx = self.__fractal.getDictVal('centerx') - (self.__fractal.getDictVal('axislength') / 2.0)
+        maxx = self.__fractal.getDictVal('centerx') + (self.__fractal.getDictVal('axislength') / 2.0)
+        miny = self.__fractal.getDictVal('centery') - (self.__fractal.getDictVal('axislength') / 2.0)
         pixelsize = abs(maxx - minx) / self.__width
 
 
         # Display the image on the screen
-        canvas = Canvas(self.__window, width=self.__width, height=self.__height, bg=self.__color)
+        canvas = Canvas(self.__window, width=self.__width, height=self.__height, bg=self.__bgColor)
         canvas.pack()
         canvas.create_image((self.__width / 2, self.__height / 2), image=self.__photoImage, state="normal")
 
@@ -46,8 +47,9 @@ class ImagePainter:
             for col in range(self.__width):
                 x = minx + col * pixelsize
                 y = miny + row * pixelsize
-                color = self.__gradient.getColor(self.__fractal.count(complex(x, y)))
+                count = self.__fractal.count(complex(x, y))
+                color = self.__gradient.getColor(count)
+
                 self.__photoImage.put(color, (col, self.__height - row))
             self.__window.update()  # display a row of pixels
-
 

@@ -9,4 +9,4 @@ class BlueGradient(Gradient):
         self.__gradient = list(self.__blue.range_to(self.__black, self.__iterations))
 
     def getColor(self, index):
-        return self.__gradient[index]
+        return str(self.__gradient[index].get_hex_l())
