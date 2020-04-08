@@ -12,10 +12,10 @@ class Mandelbrot(Fractal):
 
     def count(self, c):
         """Return the iteration count of the current pixel within the Mandelbrot set"""
-
+        comp = self.__complexNum
         for i in range(self.__max_iterations):
-            self.__complexNum = self.__complexNum * self.__complexNum + c
-            if abs(self.__complexNum) > 2:
+            comp = comp * comp + c
+            if abs(comp) > 2:
                 return i
         return self.__max_iterations - 1
 

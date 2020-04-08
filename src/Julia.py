@@ -12,9 +12,9 @@ class Julia(Fractal):
     def count(self, z):
         """Return the index of the color of the current pixel within the Julia set
         in the gradient array"""
-
+        comp = self.__complexNum
         for i in range(self.__max_iterations):
-            z = z * z + self.__complexNum
+            z = z * z + comp
             if abs(z) > 2:
                 return i
         return self.__max_iterations - 1

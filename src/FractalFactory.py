@@ -50,10 +50,8 @@ class FractalFactory():
                     self.__configDict[i] = int(temp_dict[i])
                 elif i == "centerx" or i == "centery" or i == "axislength":
                     self.__configDict[i] = float(temp_dict[i])
-                # else:
-                #     raise NotImplementedError("Incorrect format in fractal configuration file")
             else:
                 raise NotImplementedError("Incorrect format in fractal configuration file")
-    
+
         return self.__configDict
 

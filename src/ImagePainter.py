@@ -3,7 +3,6 @@ PhotoImage  stores the pixels and is capable of creating a PNG image file"""
 
 from tkinter import Tk, Canvas, PhotoImage, mainloop
 from GradientFactory import GradientFactory
-from colour import Color
 
 class ImagePainter:
     def __init__(self, fractal, gradientName):
@@ -14,7 +13,6 @@ class ImagePainter:
         self.__width = self.__fractal.getDictVal('pixels')
         self.__height = self.__fractal.getDictVal('pixels')
         self.__bgColor = '#ffffff'
-        print("Fractal: "+ str(self.__fractal) + ", Gradient:" + str(self.__gradient) + ", Iterations:" + str(self.__iterations))
         self.__photoImage = PhotoImage(width=self.__width, height=self.__height)
         self.__paint()
 
@@ -49,7 +47,6 @@ class ImagePainter:
                 y = miny + row * pixelsize
                 count = self.__fractal.count(complex(x, y))
                 color = self.__gradient.getColor(count)
-
                 self.__photoImage.put(color, (col, self.__height - row))
             self.__window.update()  # display a row of pixels
 
