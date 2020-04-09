@@ -14,6 +14,8 @@ class GradientFactory():
             return BlueGradient(iterations)
         elif gradientName == "green":
             return GreenGradient(iterations)
+        else:
+            raise NotImplementedError("Invalid gradient requested.")
 
 
 
