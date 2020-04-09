@@ -1,6 +1,6 @@
 1. Requirements -
     User will:
-        Run command line prompt including name of fractal file and possible specification of fractal
+        Run command line prompt including possible specification of fractal file and possible specification of fractal
     System will:
         Use default values for fractal or gradient if no specification is given.
         Throw appropriate errors if program is not utilized correctly.
@@ -24,6 +24,7 @@
         Use Gradient class to retrieve color of pixel in relation to the iteration count.
         Use GradientFactory class to create user specified gradients
 
-4. Implementation - 
+4. Implementation - src folder excluding Testing and Assn4.0 Outdated Files directories
 
-5. Testing -
+5. Testing - 
+    Ran each fractal with different gradient configurations. Expected outcome was observed with each trial. All tests passed.
