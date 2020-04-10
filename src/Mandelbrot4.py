@@ -2,10 +2,10 @@ from Fractal import Fractal
 
 class Mandelbrot4(Fractal):
 
-    def __init__(self, configDict):
-        self.__configDict = configDict
+    def __init__(self, iterations):
+
         self.__complexNum = complex(0.0, 0.0)
-        self.__max_iterations = self.__configDict['iterations']
+        self.__max_iterations = iterations
 
     def count(self, c):
         """Return the color of the current pixel within the Mandelbrot set"""
@@ -16,5 +16,3 @@ class Mandelbrot4(Fractal):
                 return i
         return self.__max_iterations - 1
 
-    def getDictVal(self, key):
-        return self.__configDict[key]

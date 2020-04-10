@@ -5,15 +5,15 @@ from BlueGradient import BlueGradient
 class GradientFactory():
     def __init__(self):
         pass
-    def makeGradient(self, gradientName, iterations):
+    def makeGradient(self, configDict, gradientName):
         if gradientName == None:
-            return RedGradient(iterations)
+            return RedGradient(configDict['iterations'])
         if gradientName == 'red':
-            return RedGradient(iterations)
+            return RedGradient(configDict['iterations'])
         elif gradientName == 'blue':
-            return BlueGradient(iterations)
+            return BlueGradient(configDict['iterations'])
         elif gradientName == "green":
-            return GreenGradient(iterations)
+            return GreenGradient(configDict['iterations'])
         else:
             raise NotImplementedError("Invalid gradient requested.")
 

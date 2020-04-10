@@ -2,23 +2,22 @@
 PhotoImage  stores the pixels and is capable of creating a PNG image file"""
 
 from tkinter import Tk, Canvas, PhotoImage, mainloop
-from GradientFactory import GradientFactory
 
 class ImagePainter:
-    def __init__(self, fractal, gradientName):
+    def __init__(self, fractal, gradient, configDict):
+        self.__configDict = configDict
         self.__fractal = fractal
-        self.__iterations = self.__fractal.getDictVal('iterations')
-        self.__gradient = GradientFactory().makeGradient(gradientName, self.__iterations)
+        self.__gradient = gradient
         self.__window = Tk()
-        self.__width = self.__fractal.getDictVal('pixels')
-        self.__height = self.__fractal.getDictVal('pixels')
+        self.__width = self.__configDict['pixels']
+        self.__height = self.__configDict['pixels']
         self.__bgColor = '#ffffff'
         self.__photoImage = PhotoImage(width=self.__width, height=self.__height)
         self.__paint()
 
         # Save the image as a PNG
-        self.__photoImage.write(f"{self.__fractal.getDictVal('type')}.png")
-        print(f"Wrote image {self.__fractal.getDictVal('type')}.png")
+        self.__photoImage.write(f"{self.__configDict['type']}.png")
+        print(f"Wrote image {self.__configDict['type']}.png")
 
         # Call tkinter.mainloop so the GUI remains open
         mainloop()
@@ -30,9 +29,9 @@ class ImagePainter:
         This code creates an image which is 640x640 pixels in size."""
 
 
-        minx = self.__fractal.getDictVal('centerx') - (self.__fractal.getDictVal('axislength') / 2.0)
-        maxx = self.__fractal.getDictVal('centerx') + (self.__fractal.getDictVal('axislength') / 2.0)
-        miny = self.__fractal.getDictVal('centery') - (self.__fractal.getDictVal('axislength') / 2.0)
+        minx = self.__configDict['centerx'] - (self.__configDict['axislength'] / 2.0)
+        maxx = self.__configDict['centerx'] + (self.__configDict['axislength'] / 2.0)
+        miny = self.__configDict['centery'] - (self.__configDict['axislength'] / 2.0)
         pixelsize = abs(maxx - minx) / self.__width
 
 
