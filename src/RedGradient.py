@@ -10,4 +10,4 @@ class RedGradient(Gradient):
 
 
     def getColor(self, index):
-        return str(self.__gradient[index].get_hex_l())
+        return self.__gradient[index].get_hex_l()
