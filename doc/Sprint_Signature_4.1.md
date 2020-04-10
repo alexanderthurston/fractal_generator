@@ -6,3 +6,4 @@
 |04/07| Began debugging implementation, ran into some trouble with the count() method|
 |04/08| Resolved issues with count method and finished implementation. Updated UML and plan. Wrote manual.|
 |04/09| Double checked all implementation, finished testing, made sure all documentation was up to date.|
+|04/10| Restructured files to simplify fractal configuration references. Updated doc file and reran tests.|
